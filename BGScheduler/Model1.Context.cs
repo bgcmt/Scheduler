@@ -25,10 +25,10 @@ namespace BGScheduler
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<EmpDemographic> EmpDemographics { get; set; }
         public virtual DbSet<AreaDefinition> AreaDefinitions { get; set; }
         public virtual DbSet<ClubDemographic> ClubDemographics { get; set; }
         public virtual DbSet<EmpAssignment> EmpAssignments { get; set; }
+        public virtual DbSet<EmpDemographic> EmpDemographics { get; set; }
         public virtual DbSet<RoleDefinition> RoleDefinitions { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }

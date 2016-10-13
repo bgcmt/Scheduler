@@ -1,74 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ScheduleProdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="EmpDemographic">
-    <Key>
-      <PropertyRef Name="EmpID" />
-    </Key>
-    <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EmpFirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="RoleID" Type="Int32" Nullable="false" />
-    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="EndDate" Type="DateTime" Precision="0" />
-    <Property Name="EmpLastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="EmpPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
+  <EntityContainer Name="ScheduleProdEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AreaDefinitions" EntityType="ScheduleProdModel.AreaDefinition" />
+    <EntitySet Name="ClubDemographics" EntityType="ScheduleProdModel.ClubDemographic" />
+    <EntitySet Name="EmpAssignments" EntityType="ScheduleProdModel.EmpAssignment" />
+    <EntitySet Name="EmpDemographics" EntityType="ScheduleProdModel.EmpDemographic" />
+    <EntitySet Name="RoleDefinitions" EntityType="ScheduleProdModel.RoleDefinition" />
+    <EntitySet Name="Schedules" EntityType="ScheduleProdModel.Schedule" />
+    <EntitySet Name="database_firewall_rules" EntityType="ScheduleProdModel.database_firewall_rules" />
+  </EntityContainer>
   <EntityType Name="AreaDefinition">
     <Key>
       <PropertyRef Name="AreaID" />
-      <PropertyRef Name="AreaDescription" />
     </Key>
     <Property Name="AreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="AreaDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AreaDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ClubDemographic">
     <Key>
       <PropertyRef Name="ClubID" />
-      <PropertyRef Name="ClubName" />
-      <PropertyRef Name="ClubAddress" />
-      <PropertyRef Name="ClubPhone" />
-      <PropertyRef Name="ClubContactPersonID" />
     </Key>
     <Property Name="ClubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ClubName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ClubAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ClubPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ClubContactPersonID" Type="Int32" Nullable="false" />
+    <Property Name="ClubName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClubAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClubPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ClubDirectorID" Type="Int32" Nullable="false" />
     <Property Name="ClubCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ClubState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ClubZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="EmpAssignment">
     <Key>
-      <PropertyRef Name="EmpID" />
-      <PropertyRef Name="ClubID" />
-      <PropertyRef Name="StartDate" />
+      <PropertyRef Name="PrimaryKey" />
     </Key>
+    <Property Name="PrimaryKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmpID" Type="Int32" Nullable="false" />
     <Property Name="ClubID" Type="Int32" Nullable="false" />
     <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="EndDate" Type="DateTime" Precision="0" />
     <Property Name="AreaID" Type="Int32" />
   </EntityType>
+  <EntityType Name="EmpDemographic">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpFirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="EmpLastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmpPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="RoleDefinition">
     <Key>
       <PropertyRef Name="RoleID" />
-      <PropertyRef Name="RoleDescription" />
     </Key>
     <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Schedule">
     <Key>
-      <PropertyRef Name="EmpID" />
-      <PropertyRef Name="ClubID" />
-      <PropertyRef Name="AreaID" />
-      <PropertyRef Name="StartTime" />
-      <PropertyRef Name="EndTime" />
-      <PropertyRef Name="StartDate" />
-      <PropertyRef Name="EndDate" />
+      <PropertyRef Name="PrimaryKey" />
     </Key>
+    <Property Name="PrimaryKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmpID" Type="Int32" Nullable="false" />
     <Property Name="ClubID" Type="Int32" Nullable="false" />
     <Property Name="AreaID" Type="Int32" Nullable="false" />
@@ -87,19 +84,10 @@
       <PropertyRef Name="modify_date" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
     <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
-  <EntityContainer Name="ScheduleProdEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="EmpDemographics" EntityType="Self.EmpDemographic" />
-    <EntitySet Name="AreaDefinitions" EntityType="Self.AreaDefinition" />
-    <EntitySet Name="ClubDemographics" EntityType="Self.ClubDemographic" />
-    <EntitySet Name="EmpAssignments" EntityType="Self.EmpAssignment" />
-    <EntitySet Name="RoleDefinitions" EntityType="Self.RoleDefinition" />
-    <EntitySet Name="Schedules" EntityType="Self.Schedule" />
-    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-  </EntityContainer>
 </Schema>

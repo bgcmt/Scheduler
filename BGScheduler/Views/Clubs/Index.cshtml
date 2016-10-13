@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BGScheduler.ClubDemographic>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubDirectorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClubZip)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubDirectorID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClubZip)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClubID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClubID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClubID })
+        </td>
+    </tr>
+}
+
+</table>

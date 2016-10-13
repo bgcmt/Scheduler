@@ -14,6 +14,7 @@ namespace BGScheduler
     
     public partial class Schedule
     {
+        public int PrimaryKey { get; set; }
         public int EmpID { get; set; }
         public int ClubID { get; set; }
         public int AreaID { get; set; }

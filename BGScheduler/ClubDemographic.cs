@@ -18,7 +18,7 @@ namespace BGScheduler
         public string ClubName { get; set; }
         public string ClubAddress { get; set; }
         public string ClubPhone { get; set; }
-        public int ClubContactPersonID { get; set; }
+        public int ClubDirectorID { get; set; }
         public string ClubCity { get; set; }
         public string ClubState { get; set; }
         public string ClubZip { get; set; }

@@ -4,44 +4,32 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ScheduleProdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Schedule_Prod.dbo.AreaDefinition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="ScheduleProdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AreaDefinition">
           <Key>
             <PropertyRef Name="AreaID" />
-            <PropertyRef Name="AreaDescription" />
           </Key>
           <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AreaDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Schedule_Prod.dbo.ClubDemographic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ClubDemographic">
           <Key>
             <PropertyRef Name="ClubID" />
-            <PropertyRef Name="ClubName" />
-            <PropertyRef Name="ClubAddress" />
-            <PropertyRef Name="ClubPhone" />
-            <PropertyRef Name="ClubContactPersonID" />
           </Key>
           <Property Name="ClubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClubName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ClubAddress" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ClubPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ClubContactPersonID" Type="int" Nullable="false" />
+          <Property Name="ClubDirectorID" Type="int" Nullable="false" />
           <Property Name="ClubCity" Type="nvarchar" MaxLength="50" />
           <Property Name="ClubState" Type="nvarchar" MaxLength="50" />
           <Property Name="ClubZip" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Schedule_Prod.dbo.EmpAssignment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmpAssignment">
           <Key>
-            <PropertyRef Name="EmpID" />
-            <PropertyRef Name="ClubID" />
-            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="PrimaryKey" />
           </Key>
+          <Property Name="PrimaryKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="ClubID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
@@ -62,28 +50,18 @@ warning 6002: The table/view 'Schedule_Prod.dbo.EmpAssignment' does not have a p
           <Property Name="EmpPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Schedule_Prod.dbo.RoleDefinition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RoleDefinition">
           <Key>
             <PropertyRef Name="RoleID" />
-            <PropertyRef Name="RoleDescription" />
           </Key>
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Schedule_Prod.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Schedule">
           <Key>
-            <PropertyRef Name="EmpID" />
-            <PropertyRef Name="ClubID" />
-            <PropertyRef Name="AreaID" />
-            <PropertyRef Name="StartTime" />
-            <PropertyRef Name="EndTime" />
-            <PropertyRef Name="StartDate" />
-            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="PrimaryKey" />
           </Key>
+          <Property Name="PrimaryKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="ClubID" Type="int" Nullable="false" />
           <Property Name="AreaID" Type="int" Nullable="false" />
@@ -111,51 +89,12 @@ warning 6002: The table/view 'Schedule_Prod.sys.database_firewall_rules' does no
           <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ScheduleProdModelStoreContainer">
+          <EntitySet Name="AreaDefinition" EntityType="Self.AreaDefinition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClubDemographic" EntityType="Self.ClubDemographic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpAssignment" EntityType="Self.EmpAssignment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpDemographic" EntityType="Self.EmpDemographic" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AreaDefinition" EntityType="Self.AreaDefinition" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AreaDefinition].[AreaID] AS [AreaID], 
-    [AreaDefinition].[AreaDescription] AS [AreaDescription]
-    FROM [dbo].[AreaDefinition] AS [AreaDefinition]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ClubDemographic" EntityType="Self.ClubDemographic" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ClubDemographic].[ClubID] AS [ClubID], 
-    [ClubDemographic].[ClubName] AS [ClubName], 
-    [ClubDemographic].[ClubAddress] AS [ClubAddress], 
-    [ClubDemographic].[ClubPhone] AS [ClubPhone], 
-    [ClubDemographic].[ClubContactPersonID] AS [ClubContactPersonID], 
-    [ClubDemographic].[ClubCity] AS [ClubCity], 
-    [ClubDemographic].[ClubState] AS [ClubState], 
-    [ClubDemographic].[ClubZip] AS [ClubZip]
-    FROM [dbo].[ClubDemographic] AS [ClubDemographic]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="EmpAssignment" EntityType="Self.EmpAssignment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EmpAssignment].[EmpID] AS [EmpID], 
-    [EmpAssignment].[ClubID] AS [ClubID], 
-    [EmpAssignment].[StartDate] AS [StartDate], 
-    [EmpAssignment].[EndDate] AS [EndDate], 
-    [EmpAssignment].[AreaID] AS [AreaID]
-    FROM [dbo].[EmpAssignment] AS [EmpAssignment]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="RoleDefinition" EntityType="Self.RoleDefinition" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RoleDefinition].[RoleID] AS [RoleID], 
-    [RoleDefinition].[RoleDescription] AS [RoleDescription]
-    FROM [dbo].[RoleDefinition] AS [RoleDefinition]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Schedule" EntityType="Self.Schedule" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Schedule].[EmpID] AS [EmpID], 
-    [Schedule].[ClubID] AS [ClubID], 
-    [Schedule].[AreaID] AS [AreaID], 
-    [Schedule].[StartTime] AS [StartTime], 
-    [Schedule].[EndTime] AS [EndTime], 
-    [Schedule].[StartDate] AS [StartDate], 
-    [Schedule].[EndDate] AS [EndDate]
-    FROM [dbo].[Schedule] AS [Schedule]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="RoleDefinition" EntityType="Self.RoleDefinition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
     [database_firewall_rules].[id] AS [id], 
@@ -167,80 +106,76 @@ warning 6002: The table/view 'Schedule_Prod.sys.database_firewall_rules' does no
     FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ScheduleProdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="EmpDemographic">
-          <Key>
-            <PropertyRef Name="EmpID" />
-          </Key>
-          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmpFirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="EmpLastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EmpPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+        <EntityContainer Name="ScheduleProdEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AreaDefinitions" EntityType="ScheduleProdModel.AreaDefinition" />
+          <EntitySet Name="ClubDemographics" EntityType="ScheduleProdModel.ClubDemographic" />
+          <EntitySet Name="EmpAssignments" EntityType="ScheduleProdModel.EmpAssignment" />
+          <EntitySet Name="EmpDemographics" EntityType="ScheduleProdModel.EmpDemographic" />
+          <EntitySet Name="RoleDefinitions" EntityType="ScheduleProdModel.RoleDefinition" />
+          <EntitySet Name="Schedules" EntityType="ScheduleProdModel.Schedule" />
+          <EntitySet Name="database_firewall_rules" EntityType="ScheduleProdModel.database_firewall_rules" />
+        </EntityContainer>
         <EntityType Name="AreaDefinition">
           <Key>
             <PropertyRef Name="AreaID" />
-            <PropertyRef Name="AreaDescription" />
           </Key>
           <Property Name="AreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AreaDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AreaDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ClubDemographic">
           <Key>
             <PropertyRef Name="ClubID" />
-            <PropertyRef Name="ClubName" />
-            <PropertyRef Name="ClubAddress" />
-            <PropertyRef Name="ClubPhone" />
-            <PropertyRef Name="ClubContactPersonID" />
           </Key>
           <Property Name="ClubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClubName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClubAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClubPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClubContactPersonID" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClubAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClubPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ClubDirectorID" Type="Int32" Nullable="false" />
           <Property Name="ClubCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ClubState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ClubZip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmpAssignment">
           <Key>
-            <PropertyRef Name="EmpID" />
-            <PropertyRef Name="ClubID" />
-            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="PrimaryKey" />
           </Key>
+          <Property Name="PrimaryKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpID" Type="Int32" Nullable="false" />
           <Property Name="ClubID" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="AreaID" Type="Int32" />
         </EntityType>
+        <EntityType Name="EmpDemographic">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpFirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="EmpLastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmpPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="RoleDefinition">
           <Key>
             <PropertyRef Name="RoleID" />
-            <PropertyRef Name="RoleDescription" />
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
-            <PropertyRef Name="EmpID" />
-            <PropertyRef Name="ClubID" />
-            <PropertyRef Name="AreaID" />
-            <PropertyRef Name="StartTime" />
-            <PropertyRef Name="EndTime" />
-            <PropertyRef Name="StartDate" />
-            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="PrimaryKey" />
           </Key>
+          <Property Name="PrimaryKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpID" Type="Int32" Nullable="false" />
           <Property Name="ClubID" Type="Int32" Nullable="false" />
           <Property Name="AreaID" Type="Int32" Nullable="false" />
@@ -259,105 +194,98 @@ warning 6002: The table/view 'Schedule_Prod.sys.database_firewall_rules' does no
             <PropertyRef Name="modify_date" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="ScheduleProdEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EmpDemographics" EntityType="Self.EmpDemographic" />
-          <EntitySet Name="AreaDefinitions" EntityType="Self.AreaDefinition" />
-          <EntitySet Name="ClubDemographics" EntityType="Self.ClubDemographic" />
-          <EntitySet Name="EmpAssignments" EntityType="Self.EmpAssignment" />
-          <EntitySet Name="RoleDefinitions" EntityType="Self.RoleDefinition" />
-          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ScheduleProdModelStoreContainer" CdmEntityContainer="ScheduleProdEntities">
-          <EntitySetMapping Name="EmpDemographics">
-            <EntityTypeMapping TypeName="ScheduleProdModel.EmpDemographic">
-              <MappingFragment StoreEntitySet="EmpDemographic">
-                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="EmpFirstName" ColumnName="EmpFirstName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="EmpLastName" ColumnName="EmpLastName" />
-                <ScalarProperty Name="EmpPhone" ColumnName="EmpPhone" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AreaDefinitions">
             <EntityTypeMapping TypeName="ScheduleProdModel.AreaDefinition">
               <MappingFragment StoreEntitySet="AreaDefinition">
-                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
                 <ScalarProperty Name="AreaDescription" ColumnName="AreaDescription" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClubDemographics">
             <EntityTypeMapping TypeName="ScheduleProdModel.ClubDemographic">
               <MappingFragment StoreEntitySet="ClubDemographic">
-                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
-                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
-                <ScalarProperty Name="ClubAddress" ColumnName="ClubAddress" />
-                <ScalarProperty Name="ClubPhone" ColumnName="ClubPhone" />
-                <ScalarProperty Name="ClubContactPersonID" ColumnName="ClubContactPersonID" />
-                <ScalarProperty Name="ClubCity" ColumnName="ClubCity" />
-                <ScalarProperty Name="ClubState" ColumnName="ClubState" />
                 <ScalarProperty Name="ClubZip" ColumnName="ClubZip" />
+                <ScalarProperty Name="ClubState" ColumnName="ClubState" />
+                <ScalarProperty Name="ClubCity" ColumnName="ClubCity" />
+                <ScalarProperty Name="ClubDirectorID" ColumnName="ClubDirectorID" />
+                <ScalarProperty Name="ClubPhone" ColumnName="ClubPhone" />
+                <ScalarProperty Name="ClubAddress" ColumnName="ClubAddress" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmpAssignments">
             <EntityTypeMapping TypeName="ScheduleProdModel.EmpAssignment">
               <MappingFragment StoreEntitySet="EmpAssignment">
-                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpDemographics">
+            <EntityTypeMapping TypeName="ScheduleProdModel.EmpDemographic">
+              <MappingFragment StoreEntitySet="EmpDemographic">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmpPhone" ColumnName="EmpPhone" />
+                <ScalarProperty Name="EmpLastName" ColumnName="EmpLastName" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="EmpFirstName" ColumnName="EmpFirstName" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleDefinitions">
             <EntityTypeMapping TypeName="ScheduleProdModel.RoleDefinition">
               <MappingFragment StoreEntitySet="RoleDefinition">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="ScheduleProdModel.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
-                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
-                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="database_firewall_rules">
             <EntityTypeMapping TypeName="ScheduleProdModel.database_firewall_rules">
               <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
