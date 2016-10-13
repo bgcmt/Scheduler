@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScheduleProdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Schedule_Prod.dbo.AreaDefinition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AreaDefinition">
+    <Key>
+      <PropertyRef Name="AreaID" />
+      <PropertyRef Name="AreaDescription" />
+    </Key>
+    <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Schedule_Prod.dbo.ClubDemographic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ClubDemographic">
+    <Key>
+      <PropertyRef Name="ClubID" />
+      <PropertyRef Name="ClubName" />
+      <PropertyRef Name="ClubAddress" />
+      <PropertyRef Name="ClubPhone" />
+      <PropertyRef Name="ClubContactPersonID" />
+    </Key>
+    <Property Name="ClubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClubName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClubAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClubPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClubContactPersonID" Type="int" Nullable="false" />
+    <Property Name="ClubCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="ClubState" Type="nvarchar" MaxLength="50" />
+    <Property Name="ClubZip" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Schedule_Prod.dbo.EmpAssignment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EmpAssignment">
+    <Key>
+      <PropertyRef Name="EmpID" />
+      <PropertyRef Name="ClubID" />
+      <PropertyRef Name="StartDate" />
+    </Key>
+    <Property Name="EmpID" Type="int" Nullable="false" />
+    <Property Name="ClubID" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="AreaID" Type="int" />
+  </EntityType>
+  <EntityType Name="EmpDemographic">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="EmpLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmpPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Schedule_Prod.dbo.RoleDefinition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RoleDefinition">
+    <Key>
+      <PropertyRef Name="RoleID" />
+      <PropertyRef Name="RoleDescription" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Schedule_Prod.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="EmpID" />
+      <PropertyRef Name="ClubID" />
+      <PropertyRef Name="AreaID" />
+      <PropertyRef Name="StartTime" />
+      <PropertyRef Name="EndTime" />
+      <PropertyRef Name="StartDate" />
+      <PropertyRef Name="EndDate" />
+    </Key>
+    <Property Name="EmpID" Type="int" Nullable="false" />
+    <Property Name="ClubID" Type="int" Nullable="false" />
+    <Property Name="AreaID" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Schedule_Prod.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ScheduleProdModelStoreContainer">
+    <EntitySet Name="EmpDemographic" EntityType="Self.EmpDemographic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AreaDefinition" EntityType="Self.AreaDefinition" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AreaDefinition].[AreaID] AS [AreaID], 
+    [AreaDefinition].[AreaDescription] AS [AreaDescription]
+    FROM [dbo].[AreaDefinition] AS [AreaDefinition]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ClubDemographic" EntityType="Self.ClubDemographic" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ClubDemographic].[ClubID] AS [ClubID], 
+    [ClubDemographic].[ClubName] AS [ClubName], 
+    [ClubDemographic].[ClubAddress] AS [ClubAddress], 
+    [ClubDemographic].[ClubPhone] AS [ClubPhone], 
+    [ClubDemographic].[ClubContactPersonID] AS [ClubContactPersonID], 
+    [ClubDemographic].[ClubCity] AS [ClubCity], 
+    [ClubDemographic].[ClubState] AS [ClubState], 
+    [ClubDemographic].[ClubZip] AS [ClubZip]
+    FROM [dbo].[ClubDemographic] AS [ClubDemographic]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EmpAssignment" EntityType="Self.EmpAssignment" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [EmpAssignment].[EmpID] AS [EmpID], 
+    [EmpAssignment].[ClubID] AS [ClubID], 
+    [EmpAssignment].[StartDate] AS [StartDate], 
+    [EmpAssignment].[EndDate] AS [EndDate], 
+    [EmpAssignment].[AreaID] AS [AreaID]
+    FROM [dbo].[EmpAssignment] AS [EmpAssignment]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RoleDefinition" EntityType="Self.RoleDefinition" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RoleDefinition].[RoleID] AS [RoleID], 
+    [RoleDefinition].[RoleDescription] AS [RoleDescription]
+    FROM [dbo].[RoleDefinition] AS [RoleDefinition]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Schedule].[EmpID] AS [EmpID], 
+    [Schedule].[ClubID] AS [ClubID], 
+    [Schedule].[AreaID] AS [AreaID], 
+    [Schedule].[StartTime] AS [StartTime], 
+    [Schedule].[EndTime] AS [EndTime], 
+    [Schedule].[StartDate] AS [StartDate], 
+    [Schedule].[EndDate] AS [EndDate]
+    FROM [dbo].[Schedule] AS [Schedule]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
